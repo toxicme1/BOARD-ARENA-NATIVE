@@ -50,8 +50,6 @@ jobs:
   build-debug:
     name: Build Debug APK
     runs-on: ubuntu-latest
-    env:
-      GRADLE_USER_HOME: ${{ runner.temp }}/gradle-home
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -61,6 +59,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Setup isolated Gradle user home
+        run: |
+          echo "GRADLE_USER_HOME=${{ runner.temp }}/gradle-home" >> $GITHUB_ENV
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
@@ -78,8 +80,6 @@ jobs:
   build-release:
     name: Build Release APK
     runs-on: ubuntu-latest
-    env:
-      GRADLE_USER_HOME: ${{ runner.temp }}/gradle-home
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -89,6 +89,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Setup isolated Gradle user home
+        run: |
+          echo "GRADLE_USER_HOME=${{ runner.temp }}/gradle-home" >> $GITHUB_ENV
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
@@ -106,8 +110,6 @@ jobs:
   build-bundle:
     name: Build App Bundle
     runs-on: ubuntu-latest
-    env:
-      GRADLE_USER_HOME: ${{ runner.temp }}/gradle-home
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout repository
@@ -118,6 +120,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Setup isolated Gradle user home
+        run: |
+          echo "GRADLE_USER_HOME=${{ runner.temp }}/gradle-home" >> $GITHUB_ENV
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
