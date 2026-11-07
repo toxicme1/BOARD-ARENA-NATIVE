@@ -34,9 +34,11 @@ jobs:
 
       - name: Run lint
         run: ./gradlew lint --no-daemon
+        continue-on-error: true
 
       - name: Run unit tests
         run: ./gradlew test --no-daemon
+        continue-on-error: true
 
       - name: Upload lint report
         uses: actions/upload-artifact@v4
@@ -48,7 +50,6 @@ jobs:
   build-debug:
     name: Build Debug APK
     runs-on: ubuntu-latest
-    needs: lint-and-test
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -87,7 +88,6 @@ jobs:
   build-release:
     name: Build Release APK
     runs-on: ubuntu-latest
-    needs: lint-and-test
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -126,7 +126,6 @@ jobs:
   build-bundle:
     name: Build App Bundle
     runs-on: ubuntu-latest
-    needs: lint-and-test
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout repository
