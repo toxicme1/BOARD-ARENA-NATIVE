@@ -59,21 +59,15 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
-          cache: 'gradle'
 
-      - name: Setup Gradle
+      - name: Setup Gradle (no cache)
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: ${{ env.GRADLE_VERSION }}
+          cache-disabled: true
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
-
-      - name: Clear plugin resolution cache
-        run: |
-          rm -rf ~/.gradle/caches/8.5/plugin-resolution/
-          rm -rf ~/.gradle/caches/8.5/plugins/
-          ./gradlew --stop
 
       - name: Build Debug APK
         run: ./gradlew assembleDebug --no-daemon
@@ -97,21 +91,15 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
-          cache: 'gradle'
 
-      - name: Setup Gradle
+      - name: Setup Gradle (no cache)
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: ${{ env.GRADLE_VERSION }}
+          cache-disabled: true
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
-
-      - name: Clear plugin resolution cache
-        run: |
-          rm -rf ~/.gradle/caches/8.5/plugin-resolution/
-          rm -rf ~/.gradle/caches/8.5/plugins/
-          ./gradlew --stop
 
       - name: Build Release APK (unsigned)
         run: ./gradlew assembleRelease --no-daemon
@@ -136,21 +124,12 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
-          cache: 'gradle'
 
-      - name: Setup Gradle
+      - name: Setup Gradle (no cache)
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: ${{ env.GRADLE_VERSION }}
-
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
-      - name: Clear plugin resolution cache
-        run: |
-          rm -rf ~/.gradle/caches/8.5/plugin-resolution/
-          rm -rf ~/.gradle/caches/8.5/plugins/
-          ./gradlew --stop
+          cache-disabled: true
 
       - name: Build App Bundle
         run: ./gradlew bundleRelease --no-daemon
