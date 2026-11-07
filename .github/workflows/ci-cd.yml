@@ -31,6 +31,9 @@ jobs:
         with:
           gradle-version: ${{ env.GRADLE_VERSION }}
 
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       - name: Run lint
         run: ./gradlew lint
 
@@ -64,6 +67,9 @@ jobs:
         with:
           gradle-version: ${{ env.GRADLE_VERSION }}
 
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       - name: Build Debug APK
         run: ./gradlew assembleDebug
 
@@ -93,6 +99,9 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: ${{ env.GRADLE_VERSION }}
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
 
       - name: Build Release APK (unsigned)
         run: ./gradlew assembleRelease
@@ -124,6 +133,9 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: ${{ env.GRADLE_VERSION }}
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
 
       - name: Build App Bundle
         run: ./gradlew bundleRelease
