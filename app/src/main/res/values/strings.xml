@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Board Arena</string>
+    <string name="default_notification_channel_id">board_arena_notifications</string>
+</resources>
